@@ -167,7 +167,8 @@ const init = ()=>{
 
     // 穿墙
     function teleportPlayerIfOob() {
-        if ( camera.position.z <= - 4.9||camera.position.z>=4.9||camera.position.x <= - 4.9||camera.position.x>=4.9 ) {
+        const distance = 4.8
+        if ( camera.position.z <= - distance||camera.position.z>=distance||camera.position.x <= - distance||camera.position.x>=distance ) {
           playerCollider.start.set( 0, 0.35, 0 );
           playerCollider.end.set( 0, 1, 0 );
           playerCollider.radius = 0.35;
