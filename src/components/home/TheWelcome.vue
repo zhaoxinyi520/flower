@@ -29,7 +29,7 @@ directionalLight.shadow.bias = - 0.00006;
 scene.add( directionalLight );
 
 
-//创建一个三维场景 asd232
+//创建一个三维场景 asd232  sds
 
 let container:any;
 const NUM_SPHERES = 100;
