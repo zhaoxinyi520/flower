@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TheWelcome from '../components/home/TheWelcome.vue'
+import TheWorld from '../components/world/TheWorld.vue'
 </script>
 
 <template>
-    <TheWelcome />
+    <TheWorld />
 </template>
