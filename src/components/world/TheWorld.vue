@@ -2,16 +2,13 @@
 import { onMounted  } from 'vue'
 import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
-import { newRenderer ,drawGround, drawWall, drawSky,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from '@/utils/home/create'
+import { newRenderer ,drawGround, drawWall, drawSky,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
 import {ininScene} from './createScene'
 const clock = new THREE.Clock();
 const scene = new THREE.Scene();
 ininScene(scene)
-
 const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
 camera.rotation.order = 'YXZ';
-
-
 //创建一个三维场景 asd232  sds
 let container:any;
 const NUM_SPHERES = 100;
@@ -92,4 +89,4 @@ onMounted(()=>{
     height: 100%;
   }
 }
-</style>
+</style>@/components/world/create

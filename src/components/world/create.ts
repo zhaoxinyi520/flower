@@ -1,10 +1,12 @@
 import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 
+
+let roomR = 8
+
 //let playerOnFloor = true;
 /** 创建webgl画布 **/
 export const newRenderer  = ()=>{
-    console.log("!!!")
     const renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
@@ -15,75 +17,75 @@ export const newRenderer  = ()=>{
 }
 
 export const drawGround = (scene:THREE.Scene)=>{
-    const ground = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 0xbbbbbb, depthWrite: false } ) );
+    const ground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 0xbbbbbb, depthWrite: false } ) );
     ground.rotation.x = - Math.PI / 2;
     ground.receiveShadow = true;
     scene.add( ground );
-    const grid = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid.material.opacity = 1;
     grid.material.transparent = true;
     scene.add( grid );
 }
 
 export const drawWall = (scene:THREE.Scene)=>{
-    const background = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
+    const background = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
     background.rotation.y =  0
-    background.position.set( 0, 5, -5 );
+    background.position.set( 0, roomR, -roomR );
     background.receiveShadow = true;
     scene.add( background );
-    const grid_back = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid_back = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid_back.material.opacity = 1;
     grid_back.rotateX(Math.PI / 2)
-    grid_back.position.set(0, 5, -5 )
+    grid_back.position.set(0, roomR, -roomR )
     grid_back.material.transparent = true;
     scene.add( grid_back );
 
-    const leftground = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 'green', depthWrite: false } ) );
+    const leftground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'green', depthWrite: false } ) );
     leftground.rotation.y = Math.PI / 2
-    leftground.position.set( -5, 5, 0 );
+    leftground.position.set( -roomR, roomR, 0 );
     leftground.receiveShadow = true;
     scene.add( leftground );
-    const grid_left = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid_left = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid_left.material.opacity = 1;
     grid_left.rotateZ(Math.PI / 2)
-    grid_left.position.set(-5, 5, 0 )
+    grid_left.position.set(-roomR, roomR, 0 )
     grid_left.material.transparent = true;
     scene.add( grid_left );
 
-    const rightground = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 'yellow', depthWrite: false } ) );
+    const rightground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'yellow', depthWrite: false } ) );
     rightground.rotation.y = -Math.PI/2
-    rightground.position.set( 5, 5, 0 );
+    rightground.position.set( roomR, roomR, 0 );
     rightground.receiveShadow = true;
     scene.add( rightground );
-    const grid_right = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid_right = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid_right.material.opacity = 1;
     grid_right.rotateZ(Math.PI / 2)
-    grid_right.position.set(5, 5, 0 )
+    grid_right.position.set(roomR, roomR, 0 )
     grid_right.material.transparent = true;
     scene.add( grid_right );
 
-    const frontground = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 'blue', depthWrite: false } ) );
+    const frontground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'blue', depthWrite: false } ) );
     frontground.rotation.y =  Math.PI
-    frontground.position.set( 0, 5, 5 );
+    frontground.position.set( 0, roomR, roomR );
     frontground.receiveShadow = true;
     scene.add( frontground );
-    const grid_front = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid_front = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid_front.material.opacity = 1;
     grid_front.rotateX(Math.PI / 2)
-    grid_front.position.set(0, 5, 5 )
+    grid_front.position.set(0, roomR, roomR )
     grid_front.material.transparent = true;
     scene.add( grid_front );
 }
 
 export const drawSky = (scene:THREE.Scene)=>{
-    const topground = new THREE.Mesh( new THREE.PlaneGeometry( 10, 10 ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
+    const topground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
     topground.rotation.x = Math.PI / 2;
-    topground.position.set( 0, 10, 0 );
+    topground.position.set( 0, 2*roomR, 0 );
     topground.receiveShadow = true;
     scene.add( topground );
-    const grid_top = new THREE.GridHelper( 10, 20, 0x000000, 0x000000 );
+    const grid_top = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     grid_top.material.opacity = 1;
-    grid_top.position.set( 0, 10, 0 );
+    grid_top.position.set( 0, 2*roomR, 0 );
     grid_top.material.transparent = true;
     scene.add( grid_top );
 }
@@ -211,7 +213,7 @@ export const controls = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDire
 
 
   export const  teleportPlayerIfOob = (playerCollider:Capsule,camera:THREE.PerspectiveCamera)=> {
-    const distance = 4.85
+    const distance = roomR-0.15
     if ( camera.position.z <= - distance||camera.position.z>=distance||camera.position.x <= - distance||camera.position.x>=distance ) {
       playerCollider.start.set( 0, 0.35, 0 );
       playerCollider.end.set( 0, 1, 0 );
