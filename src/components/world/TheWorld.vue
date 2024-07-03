@@ -3,7 +3,7 @@ import { onMounted  } from 'vue'
 import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 import { newRenderer ,drawGround, drawWall, drawSky,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
-import { ininScene } from './createScene'
+import { ininScene , createScene} from './createScene'
 import { getSpheres } from './createSpheres'
 import { createCamera } from './createCamera'
 const clock = new THREE.Clock();
@@ -28,15 +28,10 @@ const init = ()=>{
     container = document.getElementById( 'container' );
     const renderer = newRenderer()
     container.appendChild( renderer.domElement );
-    /**画地板 */
-    drawGround(scene)
-    /** 画墙壁 */
-    drawWall(scene)
-    /**画天花板 */
-    drawSky(scene)
+    /**创建墙壁 */
+    createScene(scene)
     /**添加鼠标监听事件 */
     addEventFn(keyStates,container,camera)
-    
     function animate() {
         const deltaTime = Math.min( 0.05, clock.getDelta() ) / STEPS_PER_FRAME;
         for ( let i = 0; i < STEPS_PER_FRAME; i ++ ) {
@@ -75,4 +70,4 @@ onMounted(()=>{
     height: 100%;
   }
 }
-</style>@/components/world/create
+</style>
