@@ -58,9 +58,7 @@ const init = ()=>{
 onMounted(()=>{
   init()
 })
-
 </script>
-
 <template>
 <div class="home-box">
   <div id="container" class="box-3d">

@@ -8,7 +8,7 @@ export const ininScene = (scene:THREE.Scene)=>{
     scene.add( fillLight1 );
 
     const directionalLight = new THREE.DirectionalLight( 0xffffff, 2.5 );
-    directionalLight.position.set( - 5, 25, - 1 );
+    directionalLight.position.set( 1, 10,  1 );
     directionalLight.castShadow = true;
     directionalLight.shadow.camera.near = 0.01;
     directionalLight.shadow.camera.far = 500;
