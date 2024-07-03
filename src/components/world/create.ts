@@ -2,8 +2,12 @@ import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 
 
-let roomR = 8
+let roomR = 1
 
+
+const vector1 = new THREE.Vector3();
+const vector2 = new THREE.Vector3();
+const vector3 = new THREE.Vector3();
 //let playerOnFloor = true;
 /** 创建webgl画布 **/
 export const newRenderer  = ()=>{
@@ -157,7 +161,6 @@ export const controls = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDire
 
 
   export const updateSpheres = ( deltaTime:any,playerCollider:Capsule,playerVelocity:THREE.Vector3 ,vector1:THREE.Vector3,vector2:THREE.Vector3,vector3:THREE.Vector3,spheres:any )=> {
-
     function playerSphereCollision( sphere:any ) {
       const center = vector1.addVectors( playerCollider.start, playerCollider.end ).multiplyScalar( 0.5 );
       const sphere_center = sphere.collider.center;
@@ -176,7 +179,6 @@ export const controls = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDire
         }
       }
     }
-
     function spheresCollisions() {
       for ( let i = 0, length = spheres.length; i < length; i ++ ) {
         const s1 = spheres[ i ];

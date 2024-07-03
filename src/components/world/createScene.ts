@@ -21,5 +21,8 @@ export const ininScene = (scene:THREE.Scene)=>{
     directionalLight.shadow.radius = 4;
     directionalLight.shadow.bias = - 0.00006;
     scene.add( directionalLight );
+
+
+    
 }
 
