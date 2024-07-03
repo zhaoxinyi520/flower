@@ -5,13 +5,16 @@ import { Capsule } from 'three/addons/math/Capsule.js';
 import { newRenderer ,drawGround, drawWall, drawSky,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
 import { ininScene } from './createScene'
 import { getSpheres } from './createSpheres'
+import { createCamera } from './createCamera'
 const clock = new THREE.Clock();
+//创建场景
 const scene = new THREE.Scene();
+/**创建光源 */
 ininScene(scene)
 //const spheres = getSpheres(scene)
-const camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.1, 1000 );
-camera.rotation.order = 'YXZ';
-//创建一个三维场景 
+/**创建相机 */
+const camera = createCamera()
+/**创建画布 */
 let container:any;
 /**每帧步数 */
 const STEPS_PER_FRAME = 5;
@@ -19,8 +22,6 @@ const playerCollider = new Capsule( new THREE.Vector3( 0, 0.35, 0 ), new THREE.V
 const playerVelocity = new THREE.Vector3();
 const playerDirection = new THREE.Vector3();
 const keyStates:any = {};
-
-
 
 const init = ()=>{
     /**创建画布 */
