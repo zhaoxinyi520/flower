@@ -2,7 +2,7 @@
 import { onMounted  } from 'vue'
 import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
-import { newRenderer ,drawGround, drawWall, drawSky,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
+import { newRenderer ,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
 import { ininScene , createScene} from './createScene'
 import { getSpheres } from './createSpheres'
 import { createCamera } from './createCamera'

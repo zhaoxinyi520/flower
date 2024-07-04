@@ -2,9 +2,10 @@ import * as THREE from 'three'
 
 let roomR = 3
 export const ininScene = (scene:THREE.Scene)=>{
-    scene.background = new THREE.Color( 0x88ccee );
-    scene.fog = new THREE.Fog( 0x88ccee, 0, 50 );
-    const fillLight1 = new THREE.HemisphereLight( 0x8dc1de, 0x00668d, 1.5 );
+    /**创建光源 */
+    scene.background = new THREE.Color( 0xffffff );
+    scene.fog = new THREE.Fog( 0xffffff, 0, 50 );
+    const fillLight1 = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1.5 );
     fillLight1.position.set( 2, 1, 1 );
     scene.add( fillLight1 );
 
@@ -98,16 +99,86 @@ export const drawWall = (scene:THREE.Scene)=>{
     scene.add( grid_front );
 }
 
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
 /**天花板 */
 export const drawSky = (scene:THREE.Scene)=>{
-    const topground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
+    const topground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 0xFFFFFF, depthWrite: false } ) );
     topground.rotation.x = Math.PI / 2;
     topground.position.set( 0, 2*roomR, 0 );
     topground.receiveShadow = true;
     scene.add( topground );
-    const grid_top = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
-    grid_top.material.opacity = 1;
-    grid_top.position.set( 0, 2*roomR, 0 );
-    grid_top.material.transparent = true;
-    scene.add( grid_top );
+
+
+
+
+    const loader = new SVGLoader();
+
+    let guiData = {
+        currentURL: './models/svg/tiger.svg',
+        drawFillShapes: true,
+        drawStrokes: true,
+        fillShapesWireframe: false,
+        strokesWireframe: false
+    };
+
+    loader.load( "/public/models/tiger.svg", function ( data ) {
+
+        const group = new THREE.Group();
+        group.scale.multiplyScalar( 0.01 );
+        group.position.x = -3;
+        group.position.y = 6;
+        group.position.z = 3;
+        //group.scale.z = 5
+        //group.scale.x = 0
+        group.rotateX(Math.PI / 2)
+        group.scale.y *= - 1;
+        let renderOrder = 0;
+        for ( const path of data.paths ) {
+            const fillColor = path.userData.style.fill;
+            if ( guiData.drawFillShapes && fillColor !== undefined && fillColor !== 'none' ) {
+                const material = new THREE.MeshBasicMaterial( {
+                    color: new THREE.Color().setStyle( fillColor ),
+                    opacity: path.userData.style.fillOpacity,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                    wireframe: guiData.fillShapesWireframe
+                } );
+                const shapes = SVGLoader.createShapes( path );
+                for ( const shape of shapes ) {
+                    const geometry = new THREE.ShapeGeometry( shape );
+                    const mesh = new THREE.Mesh( geometry, material );
+                    mesh.renderOrder = renderOrder ++;
+                    group.add( mesh );
+                }
+            }
+            const strokeColor = path.userData.style.stroke;
+            if ( guiData.drawStrokes && strokeColor !== undefined && strokeColor !== 'none' ) {
+                const material = new THREE.MeshBasicMaterial( {
+                    color: new THREE.Color().setStyle( strokeColor ),
+                    opacity: path.userData.style.strokeOpacity,
+                    transparent: true,
+                    side: THREE.DoubleSide,
+                    depthWrite: false,
+                    wireframe: guiData.strokesWireframe
+                } );
+                for ( const subPath of path.subPaths ) {
+                    const geometry = SVGLoader.pointsToStroke( subPath.getPoints(), path.userData.style );
+                    if ( geometry ) {
+                        const mesh = new THREE.Mesh( geometry, material );
+                        mesh.renderOrder = renderOrder ++;
+                        group.add( mesh );
+                    }
+                }
+            }
+        }
+        scene.add( group );
+    })
+
+    // const grid_top = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
+    // grid_top.material.opacity = 1;
+    // grid_top.position.set( 0, 2*roomR, 0 );
+    // grid_top.material.transparent = true;
+    // scene.add( grid_top );
 }
+
