@@ -1,6 +1,7 @@
 import * as THREE from 'three'
-
-let roomR = 3
+import config from './roomConfig'
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+let roomR = config.roomR
 export const ininScene = (scene:THREE.Scene)=>{
     /**创建光源 */
     scene.background = new THREE.Color( 0xffffff );
@@ -99,7 +100,7 @@ export const drawWall = (scene:THREE.Scene)=>{
     scene.add( grid_front );
 }
 
-import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+
 /**天花板 */
 export const drawSky = (scene:THREE.Scene)=>{
     const topground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 0xFFFFFF, depthWrite: false } ) );
@@ -107,38 +108,29 @@ export const drawSky = (scene:THREE.Scene)=>{
     topground.position.set( 0, 2*roomR, 0 );
     topground.receiveShadow = true;
     scene.add( topground );
-
-
-
-
     const loader = new SVGLoader();
-
     let guiData = {
-        currentURL: './models/svg/tiger.svg',
+        currentURL: '/public/models/tiger.svg',
         drawFillShapes: true,
         drawStrokes: true,
         fillShapesWireframe: false,
         strokesWireframe: false
     };
-
-    loader.load( "/public/models/tiger.svg", function ( data ) {
-
+    loader.load( guiData.currentURL, function ( data ) {
         const group = new THREE.Group();
         group.scale.multiplyScalar( 0.01 );
         group.position.x = -3;
         group.position.y = 6;
         group.position.z = 3;
-        //group.scale.z = 5
-        //group.scale.x = 0
         group.rotateX(Math.PI / 2)
         group.scale.y *= - 1;
         let renderOrder = 0;
         for ( const path of data.paths ) {
-            const fillColor = path.userData.style.fill;
+            const fillColor = path?.userData?.style.fill;
             if ( guiData.drawFillShapes && fillColor !== undefined && fillColor !== 'none' ) {
                 const material = new THREE.MeshBasicMaterial( {
                     color: new THREE.Color().setStyle( fillColor ),
-                    opacity: path.userData.style.fillOpacity,
+                    opacity: path?.userData?.style.fillOpacity,
                     transparent: true,
                     side: THREE.DoubleSide,
                     depthWrite: false,
@@ -152,18 +144,18 @@ export const drawSky = (scene:THREE.Scene)=>{
                     group.add( mesh );
                 }
             }
-            const strokeColor = path.userData.style.stroke;
+            const strokeColor = path?.userData?.style.stroke;
             if ( guiData.drawStrokes && strokeColor !== undefined && strokeColor !== 'none' ) {
                 const material = new THREE.MeshBasicMaterial( {
                     color: new THREE.Color().setStyle( strokeColor ),
-                    opacity: path.userData.style.strokeOpacity,
+                    opacity: path?.userData?.style.strokeOpacity,
                     transparent: true,
                     side: THREE.DoubleSide,
                     depthWrite: false,
                     wireframe: guiData.strokesWireframe
                 } );
                 for ( const subPath of path.subPaths ) {
-                    const geometry = SVGLoader.pointsToStroke( subPath.getPoints(), path.userData.style );
+                    const geometry = SVGLoader.pointsToStroke( subPath.getPoints(), path?.userData?.style );
                     if ( geometry ) {
                         const mesh = new THREE.Mesh( geometry, material );
                         mesh.renderOrder = renderOrder ++;
@@ -175,10 +167,14 @@ export const drawSky = (scene:THREE.Scene)=>{
         scene.add( group );
     })
 
+
+}
+
+/**画网格 */
+export const drawGrid = ()=>{
     // const grid_top = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
     // grid_top.material.opacity = 1;
     // grid_top.position.set( 0, 2*roomR, 0 );
     // grid_top.material.transparent = true;
     // scene.add( grid_top );
 }
-

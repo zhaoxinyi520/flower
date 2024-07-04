@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 
-
-let roomR = 3
+import config from './roomConfig'
+let roomR = config.roomR
 
 
 const vector1 = new THREE.Vector3();
