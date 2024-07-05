@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 
 import config from './roomConfig'
-let roomR = config.roomR
+let roomR = 40 //config.roomR
 
 
 const vector1 = new THREE.Vector3();

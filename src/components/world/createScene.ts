@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import config from './roomConfig'
 import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import {drawFontWall} from './wall/frontWall'
 let roomR = config.roomR
 export const ininScene = (scene:THREE.Scene)=>{
     /**创建光源 */
@@ -51,17 +52,7 @@ export const drawGround = (scene:THREE.Scene)=>{
 
 
 export const drawWall = (scene:THREE.Scene)=>{
-    const background = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'red', depthWrite: false } ) );
-    background.rotation.y =  0
-    background.position.set( 0, roomR, -roomR );
-    background.receiveShadow = true;
-    scene.add( background );
-    const grid_back = new THREE.GridHelper( 2*roomR, 4*roomR, 0x000000, 0x000000 );
-    grid_back.material.opacity = 1;
-    grid_back.rotateX(Math.PI / 2)
-    grid_back.position.set(0, roomR, -roomR )
-    grid_back.material.transparent = true;
-    scene.add( grid_back );
+
 
     const leftground = new THREE.Mesh( new THREE.PlaneGeometry( 2*roomR, 2*roomR ), new THREE.MeshPhongMaterial( { color: 'green', depthWrite: false } ) );
     leftground.rotation.y = Math.PI / 2
@@ -98,6 +89,10 @@ export const drawWall = (scene:THREE.Scene)=>{
     grid_front.position.set(0, roomR, roomR )
     grid_front.material.transparent = true;
     scene.add( grid_front );
+
+
+    /**画前墙 */
+    drawFontWall(scene)
 }
 
 
