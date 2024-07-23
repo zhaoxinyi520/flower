@@ -2,7 +2,7 @@
 
 <template>
     <div class="test">
-      <div style="border: 1px red solid;" id="container"></div>
+      <div  id="container"></div>
       <div style="border: 1px greenyellow solid;" id="blocker"></div>
     </div>
 </template>
@@ -60,26 +60,24 @@
             /**添加鼠标监听事件 */
             addEventFn(keyStates,container,camera)
    
-  
+            animate();
        }
   
   
        function animate() {
           requestAnimationFrame( animate );
-          //controls.update();
           renderer.render( scene, camera );
        }
   
        onMounted(()=>{
             init();
-            animate();
+            
        })
   
   
   </script>
   <style  scoped lang="scss">
   .test{
-    border: 1px red solid;
     height: 100%;
   
   }
