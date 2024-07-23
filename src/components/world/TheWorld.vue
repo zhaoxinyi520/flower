@@ -4,10 +4,7 @@ import * as THREE from 'three'
 import { Capsule } from 'three/addons/math/Capsule.js';
 import { newRenderer ,addEventFn ,updatePlayer,controls ,updateSpheres,teleportPlayerIfOob} from './create'
 import { ininScene , createScene} from './createScene'
-import { getSpheres } from './createSpheres'
 import { createCamera } from './createCamera'
-import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
-import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 const clock = new THREE.Clock();
 //创建场景
 const scene = new THREE.Scene();
@@ -26,11 +23,10 @@ const playerDirection = new THREE.Vector3();
 const keyStates:any = {};
 
 let renderer:any;
-let controls2:any;
 const init = ()=>{
     /**创建画布 */
     container = document.getElementById( 'container' );
-    const renderer = newRenderer()
+    renderer = newRenderer()
     container.appendChild( renderer.domElement );
     /**创建墙壁 */
     createScene(scene)
@@ -54,21 +50,10 @@ const init = ()=>{
     }
     animate();
 }
-
-
-
-function animate() {
-  requestAnimationFrame( animate );
-  controls2.update();
-  renderer.render( scene, camera );
-}
-
 			
 //页面初始化
 onMounted(()=>{
   init()
-  //init2()
-  animate()
 })
 </script>
 <template>
