@@ -55,7 +55,7 @@ export const updatePlayer = ( deltaTime:any,playerVelocity:THREE.Vector3,playerC
     camera.position.copy( playerCollider.end );
 }
 
-export const controls = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDirection:THREE.Vector3,camera:THREE.PerspectiveCamera,keyStates:any)=> {
+export const controls2 = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDirection:THREE.Vector3,camera:THREE.PerspectiveCamera,keyStates:any)=> {
     const  getForwardVector=()=> {
         camera.getWorldDirection( playerDirection );
         playerDirection.y = 0;
@@ -70,7 +70,7 @@ export const controls = ( deltaTime:any,playerVelocity:THREE.Vector3 ,playerDire
         return playerDirection;
     }
     // const speedDelta = deltaTime * ( playerOnFloor ? 25 : 8 );
-    const speedDelta = deltaTime * 25;
+    const speedDelta = deltaTime * 500;
     if ( keyStates[ 'KeyW' ] ) {
       console.log("ww")
       playerVelocity.add( getForwardVector().multiplyScalar( speedDelta ) );

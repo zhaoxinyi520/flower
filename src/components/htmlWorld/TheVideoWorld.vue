@@ -10,12 +10,18 @@
         import * as THREE from 'three';
         import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
         import { CSS3DRenderer, CSS3DObject } from 'three/addons/renderers/CSS3DRenderer.js';
+        import { Capsule } from 'three/addons/math/Capsule.js';
         import { onMounted  } from 'vue'
-        import { newRenderer ,addEventFn ,updatePlayer ,updateSpheres,teleportPlayerIfOob} from './create'
+        import { newRenderer ,addEventFn ,updatePlayer ,updateSpheres,teleportPlayerIfOob,controls2} from './create'
+        const clock = new THREE.Clock();
         let camera:any, scene:any, renderer:any;
         let controls:any;
         const keyStates:any = {};
-
+        /**每帧步数 */
+        const STEPS_PER_FRAME = 5;
+        const playerCollider = new Capsule( new THREE.Vector3( 0, 0.35, 0 ), new THREE.Vector3( 0, 1, 0 ), 0.35 );
+        const playerVelocity = new THREE.Vector3();
+        const playerDirection = new THREE.Vector3();
         
         function Element( id:string, x:number, y:number, z:number, ry:any ) {
               const div = document.createElement( 'div' );
@@ -59,6 +65,24 @@
             blocker.style.display = 'none';
             /**添加鼠标监听事件 */
             addEventFn(keyStates,container,camera)
+
+
+            function animate() {
+                const deltaTime = Math.min( 0.05, clock.getDelta() ) / STEPS_PER_FRAME;
+                for ( let i = 0; i < STEPS_PER_FRAME; i ++ ) {
+                    /**控制视野 */
+                    controls2( deltaTime ,playerVelocity,playerDirection,camera,keyStates);
+                    // /**更改坐标 */
+                    updatePlayer( deltaTime,playerVelocity,playerCollider,camera );
+                    // /** 跟新球体 */
+                    // //updateSpheres( deltaTime,playerCollider,playerVelocity ,vector1,vector2,vector3,spheres );
+                    // /**穿墙 */
+                    // teleportPlayerIfOob(playerCollider,camera)
+                    
+                }
+                renderer.render( scene, camera );
+                requestAnimationFrame( animate );
+            }
    
             animate();
        }
@@ -71,7 +95,6 @@
   
        onMounted(()=>{
             init();
-            
        })
   
   
