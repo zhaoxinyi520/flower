@@ -47,7 +47,7 @@
         function init() {
             container = document.getElementById( 'container' );
             camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
-            camera.position.set( 0, 0, 180);
+            camera.position.set( 0, 0, 100);
             scene = new THREE.Scene();
             renderer = new CSS3DRenderer();
             renderer.setSize( window.innerWidth, window.innerHeight );
@@ -58,9 +58,6 @@
             group.add( Element( 'IrydklNpcFI', 0, 0, - 240, Math.PI ) );
             group.add( Element( '9ubytEsCaS0', - 240, 0, 0, - Math.PI / 2 ) );
             scene.add( group );
-            controls = new TrackballControls( camera, renderer.domElement );
-            controls.rotateSpeed = 4;
-            // Block iframe events when dragging camera
             const blocker:any = document.getElementById( 'blocker' );
             blocker.style.display = 'none';
             /**添加鼠标监听事件 */
