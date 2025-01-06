@@ -2,12 +2,12 @@
 import { onMounted  } from 'vue'
 
 const init = ()=>{
-    var video = document.getElementById("myVideo");
+    var video:any = document.getElementById("myVideo");
     console.log("video",video)
-    if (video.paused) {
-        video.play();
+    if (video?.paused) {
+        video?.play();
     } else {
-        video.pause();
+        video?.pause();
     }
 }
 
@@ -69,7 +69,7 @@ onMounted(()=>{
             border-radius: 80px;
             right: 0px;
             video{
-                magrin-top:-20px;
+                //magrin-top:-20px;
             }
         }
         
