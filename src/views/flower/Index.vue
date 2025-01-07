@@ -24,8 +24,5 @@ onMounted(()=>{
     height:100%;
     background-image: url("@/assets/models/flower/pic/bg.jpg");
     background-size:cover;
-    
-    
-    
 }
 </style>
