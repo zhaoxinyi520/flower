@@ -1,18 +1,37 @@
 <script setup lang="ts">
     import { ref,onMounted } from 'vue';
-    let list:any = ref([1,2,3,4,5,6,7,8,9,10,11,12])
+    let list:any = ref([1,2,3,4,5,,7,8,9,10,11,12,13])
+    let element:any
+    
     onMounted(()=>{
-        //let list:any = ref([1,2,3,4,5,6,7,8,9,10,11,12])
+        animateScroll();
     })
+
+    const animateScroll = ()=>{
+        element = document.getElementById('movebox'); // 假设这是你的滚动容器
+        setInterval(() => {
+            let html = `<div class='new-block'>
+                <div class='new-box'></div>
+            </div>`
+            element.insertAdjacentHTML("afterbegin",html)
+            let lastChild = element.children[element.children.length-1]
+            lastChild.remove()
+        }, 1000);
+    }
+
+    const moveBlock = ()=>{
+        
+    }
+
+    
 </script>
 <template>
     <div class="bottom">
-        <div class="move-box">
-            <div class="block" v-for="(item,index) in list" :key="index">
+        <main id="movebox" class="move-box" >
+            <div class="new-block" v-for="(item,index) in list" :key="index">
                 {{index}}
-            
             </div>
-        </div>
+        </main>
     </div>
 </template>
 <style scoped lang='scss'>
@@ -20,8 +39,9 @@
         height:120px;
         box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
         background: linear-gradient(180deg,rgba(211, 221, 204,0.7) 0%,rgba(0,0,0,0) 50%,rgba(148, 145, 138,0.7) 100%);
-        overflow-x: scroll;
-        overflow-y: hidden;
+        
+        //overflow-x: scroll;
+        //overflow-y: hidden;
         &::-webkit-scrollbar {
             /*纵向滚动条*/
             width: 4px;
@@ -45,14 +65,11 @@
         }
         .move-box{
             height:120px;
-            display: inline-flex;
-            .block{
-                width:120px;
-                height:120px;
-                border-radius: 60px;
-                border:1px red solid;
-                margin: 0px 5px;
-            }
+            width:100%;
+            display: flex;
+            flex-wrap: wrap;
+            overflow: hidden;
+            
         }
     }
 </style>

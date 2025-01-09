@@ -1,0 +1,46 @@
+
+
+
+.new-block{
+    background:red;
+    width:120px;
+    height:120px;
+    border-radius: 60px;
+    border:1px red solid;
+    margin: 0px 5px;
+    animation: increaseWidth 0.7s forwards;
+
+    @keyframes increaseWidth {
+        from{
+          width: 0px;
+        }
+        to{
+          width: 120px;
+          //min-width: 120px;
+        }
+    }
+  
+    .new-box{
+  
+        animation: displaySlowly 1.5 forwards;
+
+        @keyframes displaySlowly{
+            0%{
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            70%{
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100%{
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+    }
+      
+  
+    
+  }
+  
