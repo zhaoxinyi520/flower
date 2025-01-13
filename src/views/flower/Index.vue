@@ -1,3 +1,10 @@
+<template>
+    <div class="box" @click="playMusic">
+        <Header ref="header"/>
+        <Main/>
+        <Bottom/>
+    </div>
+</template>
 <script setup lang="ts">
 import Header from '@/components/flower/Header.vue'
 import Main from '@/components/flower/Main.vue'
@@ -12,19 +19,12 @@ onMounted(()=>{
 
 const playMusic = ()=>{
     if (header.value) {
-        header.value.playMethod();
+        //header?.value?.playMethod();
     }
 }
 
 </script>
-<template>
-    <div class="box" @click="playMusic">
-        <Header ref="header"/>
-        <Main/>
-        <Bottom/>
-        
-    </div>
-</template>
+
 <style  scoped lang="scss">
 .box{
     height:100%;

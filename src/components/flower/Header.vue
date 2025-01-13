@@ -11,7 +11,7 @@
         }
         
     }
-    const playMethod = () => {
+    const playMethod:any = () => {
         console.log('Method called from child component');
         init()
     };
