@@ -1,35 +1,40 @@
 <script setup lang="ts">
     import { ref,onMounted } from 'vue';
-    let list:any = ref([1,2,3,4,5,,7,8,9,10,11,12,13])
+    let list:any = ref([1,2,3,4,5,6,7,8,9,10,11,12,13])
     let element:any
     
     onMounted(()=>{
-        animateScroll();
+        //animateScroll();
     })
 
     const animateScroll = ()=>{
         element = document.getElementById('movebox'); // 假设这是你的滚动容器
-        setInterval(() => {
+        let timer = setInterval(() => {
             let html = `<div class='new-block'>
                 <div class='new-box'></div>
             </div>`
             element.insertAdjacentHTML("afterbegin",html)
             let lastChild = element.children[element.children.length-1]
             lastChild.remove()
-        }, 1000);
+        }, 10000);
     }
 
     const moveBlock = ()=>{
         
     }
 
+    const getImageUrl = (name) => {
+        console.log(name)
+        return new URL(name, import.meta.url).href;
+    };
+
     
 </script>
 <template>
     <div class="bottom">
         <main id="movebox" class="move-box" >
-            <div class="new-block" v-for="(item,index) in list" :key="index">
-                {{index}}
+            <div class="new-block" v-for="(item,index) in list" :style="`background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+item+'.jpg')})`" :key="index">
+                <!-- <img width=120  :src="getImageUrl(`../../assets/models/flower/pic/bottom/${item}.jpg`)" alt=''/> -->
             </div>
         </main>
     </div>
