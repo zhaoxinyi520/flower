@@ -4,14 +4,14 @@
     let element:any
     
     onMounted(()=>{
-        //animateScroll();
+        animateScroll();
     })
 
     const animateScroll = ()=>{
         element = document.getElementById('movebox'); // 假设这是你的滚动容器
         let timer = setInterval(() => {
-            let html = `<div class='new-block'>
-                <div class='new-box'></div>
+            let html = `<div class='new-block' style='background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+3+'.jpg')})'>
+                
             </div>`
             element.insertAdjacentHTML("afterbegin",html)
             let lastChild = element.children[element.children.length-1]
@@ -24,7 +24,6 @@
     }
 
     const getImageUrl = (name) => {
-        console.log(name)
         return new URL(name, import.meta.url).href;
     };
 
@@ -33,8 +32,8 @@
 <template>
     <div class="bottom">
         <main id="movebox" class="move-box" >
-            <div class="new-block" v-for="(item,index) in list" :style="`background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+item+'.jpg')})`" :key="index">
-                <!-- <img width=120  :src="getImageUrl(`../../assets/models/flower/pic/bottom/${item}.jpg`)" alt=''/> -->
+            <div class="new-block" v-for="(item,index) in list"
+             :style="`background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+item+'.jpg')})`" :key="index">
             </div>
         </main>
     </div>
