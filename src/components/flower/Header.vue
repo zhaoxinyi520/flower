@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import { defineExpose } from 'vue';
     const init = ()=>{
         var video:any = document.getElementById("myVideo");
         console.log("video",video)
