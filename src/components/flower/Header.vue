@@ -5,17 +5,19 @@
         console.log("video",video)
         if(video){
             if (video.paused) {
-                video.play();
+                //video.play();
             } else {
                 video.pause();
             }
         }
         
     }
+    
     const playMethod:any = () => {
         console.log('Method called from child component');
         init()
     };
+
     defineExpose({
         playMethod
     });

@@ -1,5 +1,14 @@
 <script setup lang="ts">
+    import { defineExpose } from 'vue';
 
+    const changeImgFn = (val)=>{
+        console.log("~~~~~~~~~~~~~~")
+        console.log(val)
+    }
+
+    defineExpose({
+        changeImgFn
+    });
 </script>
 <template>
     <div class="main">
@@ -17,7 +26,7 @@
 </template>
 <style scoped lang="scss">
     .main{
-        height: calc(100% - 200px);
+        height: calc(100% - 210px);
         display: flex;
         .left{
             flex:1;
@@ -37,6 +46,7 @@
                 transition: all .5s linear;
                 img{
                     width:500px;
+                    cursor: pointer;
                 }
                 &:hover {
                     z-index: 2;

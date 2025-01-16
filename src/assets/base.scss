@@ -7,16 +7,12 @@
     border-radius: 60px;
     margin: 0px 5px;
     animation: increaseWidth 0.7s forwards;
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-block;
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(0,0,0,0.2);
-    img{
-        //border-radius: 60px;
-        height: auto;
-    }
+    cursor: pointer;
 
     @keyframes increaseWidth {
         from{
@@ -24,33 +20,37 @@
         }
         to{
           width: 120px;
-          //min-width: 120px;
         }
     }
   
-    .new-box{
-  
-        animation: displaySlowly 1.5 forwards;
+    &:hover {
+        z-index: 2;
+        -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, .1);
+        -webkit-transform: translate3d(0, -2px, 0);
+        transform: translate3d(0, -2px, 0);
 
-        
-
-        @keyframes displaySlowly{
-            0%{
-                transform: scale(0.5);
-                opacity: 1;
-            }
-            70%{
-                transform: scale(0.5);
-                opacity: 1;
-            }
-            100%{
-                transform: scale(1);
-                opacity: 0;
-            }
-        }
     }
-      
-  
     
-  }
-  
+}
+::-webkit-scrollbar {
+    /*纵向滚动条*/
+    width: 4px;
+    /*横向滚动条*/
+    height: 4px;
+}
+::-webkit-scrollbar-thumb {
+    /*滚动条滑块颜色*/
+    background-color: #3b4d70;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-track {
+    /*滚动条背景色*/
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 2px;
+}
+::-webkit-scrollbar-corner {
+    /*表格滚动条角落*/
+    //background-color: $em--color2;
+    background-color: transparent;
+}

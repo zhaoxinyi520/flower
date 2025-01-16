@@ -6,6 +6,7 @@ import Bottom from '@/components/flower/Bottom.vue'
 import { ref, onMounted  } from 'vue'
 
 const headerRef:any = ref(null);
+const mainRef:any = ref(null)
 
 onMounted(()=>{
     //init();
@@ -17,12 +18,18 @@ const playMusic = ()=>{
     }
 }
 
+const changeImg = (val)=>{
+    if(mainRef.value){
+        mainRef.value.changeImgFn(val)
+    }
+}
+
 </script>
 <template>
     <div class="box" @click="playMusic">
         <Header ref="headerRef" />
-        <Main/>
-        <Bottom/>
+        <Main ref="mainRef" />
+        <Bottom @change-img = "changeImg" />
     </div>
 </template>
 <style  scoped lang="scss">
