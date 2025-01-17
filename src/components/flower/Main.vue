@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { defineExpose } from 'vue';
 
-    const changeImgFn = (val)=>{
+    const changeImgFn = (val:any)=>{
         console.log("~~~~~~~~~~~~~~")
         console.log(val)
     }

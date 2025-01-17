@@ -18,7 +18,7 @@ const playMusic = ()=>{
     }
 }
 
-const changeImg = (val)=>{
+const changeImg = (val:any)=>{
     if(mainRef.value){
         mainRef.value.changeImgFn(val)
     }

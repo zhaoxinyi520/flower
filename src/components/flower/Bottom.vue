@@ -30,7 +30,7 @@
         return new URL(name, import.meta.url).href;
     };
 
-    const changeImg = (val)=>{
+    const changeImg = (val:any)=>{
         emit('change-img',val)
     }
     
