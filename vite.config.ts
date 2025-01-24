@@ -22,5 +22,8 @@ export default defineConfig({
         additionalData: '@import "@/assets/mixin.scss";'
       }
     }
+  },
+  build: {
+    assetsInlineLimit: 0
   }
 })

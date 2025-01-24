@@ -5,7 +5,7 @@
     const emit = defineEmits()
     
     onMounted(()=>{
-        animateScroll();
+        //animateScroll();
     })
 
     const getRandomNumber =()=> {
@@ -39,7 +39,8 @@
     <div class="bottom">
         <main id="movebox" class="move-box" >
             <div class="new-block" @mouseenter="changeImg(item)" v-for="(item,index) in list"
-             :style="`background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+item+'.jpg')})`" :key="index">
+                :style="`background-image: url('/src/assets/models/flower/pic/bottom/12.jpg')`"
+              :key="index">
             </div>
         </main>
     </div>
