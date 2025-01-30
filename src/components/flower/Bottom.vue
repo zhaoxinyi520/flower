@@ -5,7 +5,7 @@
     const emit = defineEmits()
     
     onMounted(()=>{
-        //animateScroll();
+        animateScroll();
     })
 
     const getRandomNumber =()=> {
@@ -17,7 +17,7 @@
         let timer = setInterval(() => {
             let num = getRandomNumber()
             console.log(num)
-            let html = `<div class='new-block' style='background-image:url(${getImageUrl('../../assets/models/flower/pic/bottom/'+num+'.jpg')})'>
+            let html = `<div class='new-block' style='background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+num+'.jpg')})'>
                 
             </div>`
             element.insertAdjacentHTML("afterbegin",html)
@@ -38,9 +38,8 @@
 <template>
     <div class="bottom">
         <main id="movebox" class="move-box" >
-            <div class="new-block" @mouseenter="changeImg(item)" v-for="(item,index) in list"
-                :style="`background-image: url('/src/assets/models/flower/pic/bottom/12.jpg')`"
-              :key="index">
+            <div class="new-block" v-for="(item,index) in list"
+             :style="`background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+item+'.jpg')})`" :key="index">
             </div>
         </main>
     </div>

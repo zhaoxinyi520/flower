@@ -5,7 +5,7 @@
         console.log("video",video)
         if(video){
             if (video.paused) {
-                //video.play();
+                video.play();
             } else {
                 video.pause();
             }
