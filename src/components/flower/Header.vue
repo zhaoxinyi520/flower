@@ -24,7 +24,7 @@
 </script>
 <template>
     <div class="top">
-        <h1>花花花花</h1>
+        <h1>鹿灵花舍</h1>
         <div  class="tools">
             <video class="video" id="myVideo" width="80" height="80" controls autoplay loop>
                 <source src="@/assets/models/flower/mp4/1.mp4" type="video/mp4">
