@@ -26,7 +26,7 @@
         let timer = setInterval(() => {
             let num = getRandomNumber()
 
-            console.log(num)
+            console.log(num,arr)
             let html = `<div class='new-block' style='background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+num+'.jpg')})'>
                 
             </div>`
