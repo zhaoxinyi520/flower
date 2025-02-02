@@ -1,6 +1,7 @@
 <script setup lang="ts">
     import { ref, onMounted, defineEmits} from 'vue';
-    let list:any = ref([1,2,3,4,5,6,7,8,9,10,11,12,13])
+    let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+    let list:any = ref(arr)
     let element:any
     const emit = defineEmits()
     
@@ -8,14 +9,23 @@
         animateScroll();
     })
 
+    //随机不重复数据
     const getRandomNumber =()=> {
-        return Math.floor(Math.random() * 30) + 1;
+        let rd = Math.floor(Math.random() * 30) + 1
+        while (arr.includes(rd)) {
+            rd = Math.floor(Math.random() * 30) + 1
+        }
+        arr.unshift(rd)
+        arr.pop()
+        return rd
     }
  
+    //定时任务
     const animateScroll = ()=>{
         element = document.getElementById('movebox'); // 假设这是你的滚动容器
         let timer = setInterval(() => {
             let num = getRandomNumber()
+
             console.log(num)
             let html = `<div class='new-block' style='background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+num+'.jpg')})'>
                 
