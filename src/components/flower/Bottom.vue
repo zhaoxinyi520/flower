@@ -59,6 +59,7 @@
 
     const handleMouseOver = (val:any)=>{
         console.log("~~~~~~~~~~~~~~~~~~~~~~~~val:",val)
+        emit('change-center-img',val)
     }
     
 </script>

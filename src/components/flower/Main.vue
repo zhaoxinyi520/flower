@@ -1,13 +1,20 @@
 <script setup lang="ts">
     import { defineExpose } from 'vue';
 
+    
+
     const changeImgFn = (val:any)=>{
         console.log("~~~~~~~~~~~~~~")
         console.log(val)
     }
 
+    const changeCenterImgFn = (val:any)=>{
+        console.log("~~~~~~~~~~111~~~~",val)
+    }
+
     defineExpose({
-        changeImgFn
+        changeImgFn,
+        changeCenterImgFn
     });
 </script>
 <template>

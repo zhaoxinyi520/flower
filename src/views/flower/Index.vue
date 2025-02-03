@@ -24,12 +24,18 @@ const changeImg = (val:any)=>{
     }
 }
 
+const changeCenterImg = (val:any)=>{
+    if(mainRef.value){
+        mainRef.value.changeCenterImgFn(val)
+    }
+}
+
 </script>
 <template>
     <div class="box" @click="playMusic">
         <Header ref="headerRef" />
         <Main ref="mainRef" />
-        <Bottom @change-img = "changeImg" />
+        <Bottom @change-img = "changeImg" @change-center-img = "changeCenterImg"/>
     </div>
 </template>
 <style  scoped lang="scss">
