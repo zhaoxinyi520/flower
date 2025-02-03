@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import { ref, onMounted, defineEmits} from 'vue';
+    import { nextTick } from 'vue';
     let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13]
     let list:any = ref(arr)
     let element:any
@@ -15,6 +16,8 @@
         while (arr.includes(rd)) {
             rd = Math.floor(Math.random() * 30) + 1
         }
+        // list.value.unshift(rd)
+        // list.value.pop()
         arr.unshift(rd)
         arr.pop()
         return rd
@@ -27,12 +30,22 @@
             let num = getRandomNumber()
 
             console.log(num,arr)
-            let html = `<div class='new-block' style='background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+num+'.jpg')})'>
+            let html = `<div id=${num}  class='new-block' style='background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+num+'.jpg')})'>
                 
             </div>`
+            
+            
+            
             element.insertAdjacentHTML("afterbegin",html)
             let lastChild = element.children[element.children.length-1]
             lastChild.remove()
+            nextTick(()=>{
+                let dom = document.getElementById(num)
+                dom.addEventListener('mouseover', function(event) {
+                    handleMouseOver(num)
+                });
+            });
+            
         }, 10000);
     }
 
@@ -43,13 +56,18 @@
     const changeImg = (val:any)=>{
         emit('change-img',val)
     }
+
+    const handleMouseOver = (val:any)=>{
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~val:",val)
+    }
     
 </script>
 <template>
     <div class="bottom">
         <main id="movebox" class="move-box" >
             <div class="new-block" v-for="(item,index) in list"
-             :style="`background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+item+'.jpg')})`" :key="index">
+            @mouseover="handleMouseOver(item)" 
+            :style="`background-image:url(${getImageUrl('http://47.98.168.146:8080/images/flower/bottom/'+item+'.jpg')})`" :key="index">
             </div>
         </main>
     </div>
