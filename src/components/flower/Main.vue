@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { defineExpose } from 'vue';
+    import { defineExpose,ref } from 'vue';
 
-    
+    let images:any = ref(new URL("@/assets/models/flower/pic/bottom/1.jpg", import.meta.url).href)
 
     const changeImgFn = (val:any)=>{
         console.log("~~~~~~~~~~~~~~")
@@ -10,6 +10,7 @@
 
     const changeCenterImgFn = (val:any)=>{
         console.log("~~~~~~~~~~111~~~~",val)
+        images.value = `http://47.98.168.146:8080/images/flower/bottom/${val}.jpg`
     }
 
     defineExpose({
@@ -21,7 +22,7 @@
     <div class="main">
         <div class="left">
             <div class="show-block">
-                <img src="@/assets/models/flower/pic/1.jpg"/>
+                <img :src="images"/>
             </div>
         </div>
         <div class="right">

@@ -40,10 +40,13 @@
             let lastChild = element.children[element.children.length-1]
             lastChild.remove()
             nextTick(()=>{
-                let dom = document.getElementById(num)
-                dom.addEventListener('mouseover', function(event) {
-                    handleMouseOver(num)
-                });
+                let dom = document.getElementById(JSON.stringify(num))
+                if(dom){
+                    dom.addEventListener('mouseover', function(event) {
+                        handleMouseOver(num)
+                    });
+                }
+                
             });
             
         }, 10000);
